@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Animal Shelter</title>
+    </head>
+    <body>
+        <h1>Welcom to Animal Shelter</h1>
+
+        <p>New animal type:</p>
+
+        <form action="/add_animal_type" method="post">
+            <label for="name">Animal Type:</label>
+            <input id="name" type="text" name="name">
+
+            <button type="submit">Create Animal Type</button>
+        </form>
+
+        {% if animal_types is not empty %}
+            <p>Here are all the types of animals:</p>
+            <ul>
+                {% for animal_type in animal_types %}
+                    <li><a href="/animal_type/{{animal_type.getId}}">{{ animal_type.getName }}</a></li>
+                    {% endfor %}
+            </ul>
+        {% else %}
+            <p>There are no categories yet!</p>
+        {% endif %}
+
+    </body>
+</html>
