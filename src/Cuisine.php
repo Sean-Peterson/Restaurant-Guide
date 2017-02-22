@@ -65,14 +65,18 @@
         }
 
         // method to find single cuisine by id
-        static function findCuisine()
+        static function findCuisine($id)
         {
             $find_result = $GLOBALS['DB']->query("SELECT * FROM cuisine where id = {$id};");
-            $found_cuisine = new Cuisine($find_result['cuisine_name'],$find_result['id']);
+            $found_cuisine = null;
+            foreach($find_result as $result){
+                $found_cuisine = new Cuisine($result['cuisine_name'],$result['id']);
+            }
             return $found_cuisine;
         }
 
         // method to return all restaurants of given cuisine
+
 
 
     }

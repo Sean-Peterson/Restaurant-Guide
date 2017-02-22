@@ -108,7 +108,7 @@ class CuisineTest extends PHPUnit_Framework_TestCase
     //     $this->assertEquals($update_name, $result[0]->getCuisineName());
     // }
 
-    function findCuisine()
+    function test_findCuisine()
     {
         $cuisine_name = 'Thai';
         $test_cuisine = new Cuisine($cuisine_name);

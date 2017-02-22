@@ -94,6 +94,82 @@ class RestaurantTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($result, [$test_restaurant,$test_restaurant2]);
     }
 
+    function test_UpdateProperty()
+    {
+        // Arrange
+        $cuisine_name = 'Thai';
+        $test_cuisine = new Cuisine ($cuisine_name);
+        $test_cuisine->save();
+        $restaurant_name = "Mee Sen";
+        $price = "$";
+        $description = "Good enough thai food";
+        $id_cuisine=$test_cuisine->getId();
+        $test_restaurant = new Restaurant($restaurant_name,$price,$description,$id_cuisine);
+        $test_restaurant->save();
+        $id = $test_restaurant->getId();
+        $restaurant_name_update = "Fancy Mee Sen";
+        $test_restaurant->updateProperty("restaurant_name",$restaurant_name_update);
+        $price_update = "$$";
+        $test_restaurant->updateProperty("price",$price_update);
+        $description_update = "Better than Good enough thai food";
+        $test_restaurant->updateProperty("description",$description_update);
+
+
+        // Act
+        $result_restaurant = Restaurant::getAll();
+        $result = array(
+            $result_restaurant[0]->getRestaurantName(),
+            $result_restaurant[0]->getPrice(),
+            $result_restaurant[0]->getDescription(),
+            $result_restaurant[0]->getIdCuisine(),
+            $result_restaurant[0]->getId()
+        );
+        $expected_result = array($restaurant_name_update,$price_update,$description_update,$id_cuisine,$id);
+
+        // Assert
+        $this->assertEquals($result, $expected_result);
+    }
+
+    function test_findRestaurant()
+    {
+        // Arrange
+        $cuisine_name = 'Thai';
+        $test_cuisine = new Cuisine ($cuisine_name);
+        $test_cuisine->save();
+        $restaurant_name = "Mee Sen";
+        $price = "$";
+        $description = "Good enough thai food";
+        $id_cuisine=$test_cuisine->getId();
+        $test_restaurant = new Restaurant($restaurant_name,$price,$description,$id_cuisine);
+        $test_restaurant->save();
+
+        // Act
+        $result =  Restaurant::findRestaurant($test_restaurant->getId());
+
+        // Assert
+        $this->assertEquals($result, $test_restaurant);
+    }
+
+    function test_findRestaurantByProperty()
+    {
+        // Arrange
+        $cuisine_name = 'Thai';
+        $test_cuisine = new Cuisine ($cuisine_name);
+        $test_cuisine->save();
+        $restaurant_name = "Mee Sen";
+        $price = "$";
+        $description = "Good enough thai food";
+        $id_cuisine=$test_cuisine->getId();
+        $test_restaurant = new Restaurant($restaurant_name,$price,$description,$id_cuisine);
+        $test_restaurant->save();
+
+        // Act
+        $result =  Restaurant::findRestaurantByProperty("restaurant_name", "Mee Sen");
+
+        // Assert
+        $this->assertEquals($result[0], $test_restaurant);
+    }
+
 
 
 
