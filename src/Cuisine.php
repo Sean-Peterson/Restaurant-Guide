@@ -45,7 +45,7 @@
                 return $cuisines;
             }
 
-            // method to update single cuisine
+            // methods to update single cuisine
             function updateProperty($property, $update_value)
             {
                 $GLOBALS['DB']->exec("UPDATE cuisine SET {$property}='{$update_value}' where id = {$this->getId()};");
@@ -65,6 +65,12 @@
             }
 
             // method to find single cuisine by id
+            static function findCuisine()
+            {
+                $find_result = $GLOBALS['DB']->query("SELECT * FROM cuisine where id = {$id};");
+                $found_cuisine = new Cuisine($find_result['cuisine_name'],$find_result['id']);
+                return $found_cuisine;
+            }
 
             // method to return all restaurants of given cuisine
 
