@@ -6,6 +6,7 @@
 */
 
 require_once "src/Cuisine.php";
+require_once "src/Restaurant.php";
 
 $server = 'mysql:host=localhost:8889;dbname=restaurant_guide_test';
 $username = 'root';
@@ -17,6 +18,7 @@ class CuisineTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         Cuisine::deleteAll();
+        Restaurant::deleteAll();
     }
 
     function test_getters()
@@ -93,18 +95,18 @@ class CuisineTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($update_name, $result[0]->getCuisineName());
     }
-    function test_UpdateCuisine()
-    {
-        $cuisine_name = 'Thai';
-        $test_cuisine = new Cuisine($cuisine_name);
-        $test_cuisine->save();
-        $update_name = 'Mexican';
-        $test_cuisine->updateCusineName($update_name);
-
-        $result = Cuisine::getAll();
-
-        $this->assertEquals($update_name, $result[0]->getCuisineName());
-    }
+    // function test_UpdateCuisine()
+    // {
+    //     $cuisine_name = 'Thai';
+    //     $test_cuisine = new Cuisine($cuisine_name);
+    //     $test_cuisine->save();
+    //     $update_name = 'Mexican';
+    //     $test_cuisine->updateCusineName($update_name);
+    //
+    //     $result = Cuisine::getAll();
+    //
+    //     $this->assertEquals($update_name, $result[0]->getCuisineName());
+    // }
 
     function findCuisine()
     {
