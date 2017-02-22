@@ -22,7 +22,6 @@
               return $this->id;
             }
 
-            // need to write save, getall, deleteall to pass next tests.
             static function deleteAll()
             {
                 $GLOBALS['DB']->exec("DELETE FROM cuisine;");
@@ -45,6 +44,18 @@
                 }
                 return $cuisines;
             }
+
+            // method to update single cuisine
+
+            // method to delete single cuisine
+            function deleteCuisine($id)
+            {
+                $GLOBALS['DB']->exec("DELETE FROM cuisine where id = {$id};");
+            }
+
+            // method to find single cuisine by id
+
+            // method to return all restaurants of given cuisine
 
 
     }
