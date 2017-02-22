@@ -46,6 +46,17 @@
             }
 
             // method to update single cuisine
+            function updateProperty($property, $update_value)
+            {
+                $GLOBALS['DB']->exec("UPDATE cuisine SET {$property}='{$update_value}' where id = {$this->getId()};");
+                $this->$property = $update_value;
+            }
+            function updateCusineName($update_value)
+            {
+                $GLOBALS['DB']->exec("UPDATE cuisine SET cuisine_name ='{$update_value}' where id = {$this->getId()};");
+                $this->cuisine_name = $update_value;
+            }
+
 
             // method to delete single cuisine
             function deleteCuisine($id)
