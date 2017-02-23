@@ -2,30 +2,31 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Animal Shelter</title>
+        <title>Restaurants Guide</title>
     </head>
     <body>
-        <h1>Welcom to Animal Shelter</h1>
+        <h1>Welcome to Portland's restaurant guide</h1>
 
-        <p>New animal type:</p>
-
-        <form action="/add_animal_type" method="post">
-            <label for="name">Animal Type:</label>
-            <input id="name" type="text" name="name">
-
-            <button type="submit">Create Animal Type</button>
-        </form>
-
-        {% if animal_types is not empty %}
-            <p>Here are all the types of animals:</p>
-            <ul>
-                {% for animal_type in animal_types %}
-                    <li><a href="/animal_type/{{animal_type.getId}}">{{ animal_type.getName }}</a></li>
+            {% if cuisines is not empty %}
+                <h3>Select a cuisine</h3>
+                <ul>
+                    {% for cuisine_type in cuisines %}
+                        <li><a href="/cuisine_type/{{cuisine_type.getId}}">{{ cuisine_type.getCuisineName }}</a></li>
                     {% endfor %}
-            </ul>
-        {% else %}
-            <p>There are no categories yet!</p>
-        {% endif %}
+                </ul>
+            {%endif%}
+
+            <h3>Input a cuisine!</h3>
+            <form action="/" method="post">
+                <input type="text" name="new_cuisine">
+                <button type="submit" name="button">Add</button>
+            </form>
+
+            <!-- <form action="/delete" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <input type="text" name="delete">
+                <button type="submit" name="button">Delete</button>
+            </form> -->
 
     </body>
 </html>

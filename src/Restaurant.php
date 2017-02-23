@@ -73,9 +73,9 @@
 
 
             // method to delete single restaurant
-            function deleteRestaurant($id)
+            function deleteRestaurant()
             {
-                $GLOBALS['DB']->exec("DELETE FROM restaurants where id = {$id};");
+                $GLOBALS['DB']->exec("DELETE FROM restaurants where id = {$this->id};");
             }
 
             // method to find single restaurant by id
@@ -92,7 +92,6 @@
             static function findRestaurantByProperty($property, $search_value)
             {
                 $find_results = $GLOBALS['DB']->query("SELECT * FROM restaurants where {$property} = '{$search_value}';");
-                var_dump($find_results);
                 $found_restaurants = array();
                 foreach($find_results as $result){
                     $found_restaurant = new Restaurant($result['restaurant_name'],$result['price'], $result['description'],$result['id_cuisine'],$result['id']);

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Restaurants Guide</title>
+    </head>
+    <body>
+        <h1>{{restaurant.getRestaurantName}}</h1>
+
+                <ul>
+                        <li>{{ restaurant.getRestaurantName }}</li>
+                        <li>{{ restaurant.getPrice }}</li>
+                        <li>{{ restaurant.getDescription }}</li>
+                </ul>
+
+                <form action="/" method="get">
+                    <button type="submit" name="button">Home</button>
+                    <button type="submit" formaction="/cuisine_type/{{restaurant.getIdCuisine}}">Back to {{cuisine.getCuisineName}}</button>
+                </form>
+
+            <!-- <form action="/delete" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <input type="text" name="delete">
+                <button type="submit" name="button">Delete</button>
+            </form> -->
+
+    </body>
+</html>

@@ -2,8 +2,8 @@
     date_default_timezone_set('America/Los_Angeles');
 
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/Animal.php";
-    require_once __DIR__."/../src/AnimalType.php";
+    require_once __DIR__."/../src/Cuisine.php";
+    require_once __DIR__."/../src/Restaurant.php";
 
 
     $app = new Silex\Application();
@@ -11,7 +11,7 @@
     $app['debug'] = true;
 
 
-    $server = 'mysql:host=localhost:8889;dbname=animal_shelter';
+    $server = 'mysql:host=localhost:8889;dbname=restaurant_guide';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -21,11 +21,41 @@
     ));
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array('animal_types' => AnimalType::getAll()));
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
-    
+    $app->post("/", function() use ($app) {
+        $add_cuisine = new Cuisine($_POST['new_cuisine']);
+        $add_cuisine->save();
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
 
+    // $app->delete("/delete", function() use ($app) {
+    //     $something = $_POST['delete'];
+    //     Cuisine::deleteCuisine($something);
+    //     return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    // });
+
+    $app->get("/cuisine_type/{id}", function($id) use ($app) {
+        $restaurants = Restaurant::findRestaurantByProperty("id_cuisine",$id);
+        $this_cuisine = Cuisine::findCuisine($id);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $this_cuisine, 'restaurants'=>$restaurants));
+    });
+
+    $app->post("/cuisine_type/{id}/add", function($id) use ($app) {
+        $add_restaurant = new Restaurant($_POST['name'], $_POST['price'], $_POST['description'], $_POST['id_cuisine']);
+        $add_restaurant->save();
+        $restaurants = Restaurant::findRestaurantByProperty("id_cuisine",$id);
+        $this_cuisine = Cuisine::findCuisine($id);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $this_cuisine, 'restaurants'=>$restaurants));
+    });
+
+    $app->get("/restaurant/{id}", function($id) use ($app) {
+        $restaurant = Restaurant::findRestaurant($id);
+        $id_cuisine = $restaurant->getIdCuisine();
+        $cuisine = Cuisine::findCuisine($id_cuisine);
+        return $app['twig']->render('restaurant.html.twig', array('restaurant'=>$restaurant, 'cuisine'=>$cuisine));
+    });
 
 
 

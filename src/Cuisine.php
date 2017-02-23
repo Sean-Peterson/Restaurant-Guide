@@ -59,9 +59,9 @@
 
 
         // method to delete single cuisine
-        function deleteCuisine($id)
+        function deleteCuisine()
         {
-            $GLOBALS['DB']->exec("DELETE FROM cuisine where id = {$id};");
+            $GLOBALS['DB']->exec("DELETE FROM cuisine where id = {$this->id};");
         }
 
         // method to find single cuisine by id

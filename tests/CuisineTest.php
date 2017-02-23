@@ -76,7 +76,7 @@ class CuisineTest extends PHPUnit_Framework_TestCase
         $test_cuisine2 = new Cuisine($cuisine_name2);
         $test_cuisine2->save();
 
-        $test_cuisine2->deleteCuisine($test_cuisine2->getId());
+        $test_cuisine2->deleteCuisine();
         $result = Cuisine::getAll();
 
         $this->assertEquals($result[0], $test_cuisine);
