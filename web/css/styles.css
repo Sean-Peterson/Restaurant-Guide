@@ -14,7 +14,7 @@ li {
     padding-left: 40px;
     text-align: right;
 }
-.left-header{    
+.left-header{
     display: inline-block;
 }
 
@@ -25,11 +25,10 @@ li {
     margin-bottom: 70px;
     padding-bottom: 0px;
 }
-.middle {
-    font-size: 2em;
+.content {
     margin-bottom: 70px;
 
 }
-.bottom {
+.control {
     margin-bottom: 70px;
 }

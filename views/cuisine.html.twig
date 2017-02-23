@@ -1,37 +1,33 @@
-<html>
-    <head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/styles.css" type="text/css">
-    <title>Restaurants Guide</title>
-    </head>
-    <body>
-        <div class="container">
+{% extends "index.html.twig" %}
 
-            <h1>Welcome to Portland's restaurant guide</h1>
+    {% block navbar %}
+    <form class="form-inline" action="index.html" method="post">
+        <a href="/">Home</a>
+    </form>
+    {% endblock %}
 
-            {% if restaurants is not empty %}
-                <h3>Select a {{cuisine.getCuisineName}} restaurant</h3>
-                <ul>
-                    {% for restaurant in restaurants %}
-                        <li><a href="/restaurant/{{restaurant.getId}}">{{ restaurant.getRestaurantName }}</a></li>
-                    {% endfor %}
-                </ul>
-            {%endif%}
+    {% block content %}
+        <h2>{{cuisine.getCuisineName}} restaurants</h2>
+        {% if restaurants is not empty %}
+            <ul>
+                {% for restaurant in restaurants %}
+                    <li><a href="/restaurant/{{restaurant.getId}}">{{ restaurant.getRestaurantName }}</a></li>
+                {% endfor %}
+            </ul>
+        {%endif%}
+    {% endblock %}
 
-            <h3>Input a restaurant!</h3>
-            <form action="/cuisine_type/{{cuisine.getId}}/add" method="post">
-                <input type="text" name="name" placeholder="Restaurant Name">
-                <input type="text" name="price" placeholder="Price">
-                <input type="text" name="description" placeholder="Quick description">
-                <input type="hidden" name="id_cuisine" value="{{cuisine.getId}}">
-                <button type="submit" name="button">Add</button>
-            </form>
-
-            <form action="/" method="get">
-                <button type="submit" name="button">Home</button>
-                <button type="submit" formaction="/cuisine_type/{{cuisine.getId}}/edit" name="edit">Edit this Cuisine</button>
-            </form>
-
-        </div>
-    </body>
-</html>
+    {% block controls %}
+        <h3>Input a new {{cuisine.getCuisineName}} restaurant:</h3>
+        <form action="/cuisine_type/{{cuisine.getId}}/add" method="post">
+            <input type="text" name="name" placeholder="Restaurant Name">
+            <input type="text" name="price" placeholder="Price">
+            <input type="text" name="description" placeholder="Quick description">
+            <input type="hidden" name="id_cuisine" value="{{cuisine.getId}}">
+            <button type="submit" name="button">Add</button>
+        </form>
+        <h3>Edit cuisine name</h3>
+        <form action="/" method="get">
+            <button type="submit" formaction="/cuisine_type/{{cuisine.getId}}/edit" name="edit">Edit</button>
+        </form>
+    {% endblock %}

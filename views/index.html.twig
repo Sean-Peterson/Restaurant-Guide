@@ -14,27 +14,32 @@
                     <h1>Welcome to Portland's restaurant guide</h1>
                 </div>
                 <div class="right-header">
+                    {% block navbar %}
+                    {% endblock %}
                 </div>
             </div>
 
-            <div class="well middle">
-                {% if cuisines is not empty %}
-                    <h2>Select a cuisine</h2>
-                    <ul>
-                        {% for cuisine_type in cuisines %}
-                            <li><a href="/cuisine_type/{{cuisine_type.getId}}">{{ cuisine_type.getCuisineName }}</a></li>
-                        {% endfor %}
-                    </ul>
-                {%endif%}
+            <div class="well content">
+                {% block content %}
+                    {% if cuisines is not empty %}
+                        <h2>Select a cuisine</h2>
+                        <ul>
+                            {% for cuisine_type in cuisines %}
+                                <li><a href="/cuisine_type/{{cuisine_type.getId}}">{{ cuisine_type.getCuisineName }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {%endif%}
+                {% endblock %}
             </div>
 
-            <div class="well bottom">
-
-                <h3>Input a cuisine!</h3>
-                <form action="/" method="post">
-                    <input type="text" name="new_cuisine">
-                    <button type="submit" name="button">Add</button>
-                </form>
+            <div class="well controls">
+                {% block controls %}
+                    <h3>Input a cuisine!</h3>
+                    <form action="/" method="post">
+                        <input type="text" name="new_cuisine">
+                        <button type="submit" name="button">Add</button>
+                    </form>
+                {% endblock %}
             </div>
         </div>
     </body>

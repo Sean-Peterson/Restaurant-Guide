@@ -1,30 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/styles.css" type="text/css">
-        <title>Restaurants Guide</title>
-    </head>
-    <body>
-        <div class="container">
+{% extends "index.html.twig"%}
 
-            <h1>{{restaurant.getRestaurantName}}</h1>
-
-            <ul>
-                    <li>Name: {{ restaurant.getRestaurantName }}</li>
-                    <li>Price: {{ restaurant.getPrice }}</li>
-                    <li>Description: {{ restaurant.getDescription }}</li>
-                    <li>Cuisine: {{ cuisine.getCuisineName }}</li>
-            </ul>
-
-            <form action="/" method="get">
-                <button type="submit" name="button">Home</button>
-                <button type="submit" formaction="/cuisine_type/{{restaurant.getIdCuisine}}">Back to {{cuisine.getCuisineName}}</button>
-            </form>
-
-            <form action="/restaurant/{{restaurant.getId}}/edit" method="get">
-                <button type="submit" name="button">Edit {{restaurant.getRestaurantName}}</button>
-            </form>
-        </div>
-    </body>
-</html>
+    {% block navbar %}
+    <a href="/">Home</a>
+    <a href="/cuisine_type/{{restaurant.getIdCuisine}}">Back</a>
+    {% endblock %}
+    {% block content %}
+        <h1>{{restaurant.getRestaurantName}}</h1>
+        <ul>
+            <li>Name: {{ restaurant.getRestaurantName }}</li>
+            <li>Price: {{ restaurant.getPrice }}</li>
+            <li>Description: {{ restaurant.getDescription }}</li>
+            <li>Cuisine: {{ cuisine.getCuisineName }}</li>
+        </ul>
+    {% endblock %}
+    {% block controls %}
+        <form action="/restaurant/{{restaurant.getId}}/edit" method="get">
+            <button type="submit" name="button">Edit {{restaurant.getRestaurantName}}</button>
+        </form>
+    {% endblock %}
