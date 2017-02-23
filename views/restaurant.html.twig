@@ -8,14 +8,24 @@
         <h1>{{restaurant.getRestaurantName}}</h1>
 
                 <ul>
-                        <li>{{ restaurant.getRestaurantName }}</li>
-                        <li>{{ restaurant.getPrice }}</li>
-                        <li>{{ restaurant.getDescription }}</li>
+                        <li>Name: {{ restaurant.getRestaurantName }}</li>
+                        <li>Price: {{ restaurant.getPrice }}</li>
+                        <li>Description: {{ restaurant.getDescription }}</li>
+                        <li>Cuisine: {{ cuisine.getCuisineName }}</li>
                 </ul>
 
                 <form action="/" method="get">
                     <button type="submit" name="button">Home</button>
                     <button type="submit" formaction="/cuisine_type/{{restaurant.getIdCuisine}}">Back to {{cuisine.getCuisineName}}</button>
+                </form>
+
+                <form action="/restaurant/{{restaurant.getId}}/edit" method="get">
+                    <button type="submit" name="button">Edit {{restaurant.getRestaurantName}}</button>
+                </form>
+
+                <form action="/cuisine_type/{{restaurant.getIdCuisine}}{{restaurant.getId}}" method="post">
+                    <input name="_method" type="hidden" value="delete">
+                    <button type="submit">Delete {{restaurant.getRestaurantName}}</button>
                 </form>
 
             <!-- <form action="/delete" method="post">

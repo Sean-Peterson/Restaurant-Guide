@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -25,11 +24,10 @@
                 <button type="submit" name="button">Add</button>
             </form>
 
-            <!-- <form action="/delete" method="post">
-                <input name="_method" type="hidden" value="delete">
-                <input type="text" name="delete">
-                <button type="submit" name="button">Delete</button>
-            </form> -->
+            <form action="/" method="get">
+                <button type="submit" name="button">Home</button>
+                <button type="submit" formaction="/cuisine_type/{{cuisine.getId}}/edit" name="edit">Edit this Cuisine</button>
+            </form>
 
     </body>
 </html>
