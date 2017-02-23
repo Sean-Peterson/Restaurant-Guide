@@ -45,7 +45,7 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $this_cuisine, 'restaurants'=>$restaurants));
     });
 
-    $app->delete("/cuisine_type/{id_cuisine}{id_restaurant}", function($id_cuisine,$id_restaurant) use ($app) {
+    $app->delete("/cuisine_type/{id_cuisine}/{id_restaurant}", function($id_cuisine,$id_restaurant) use ($app) {
         $restaurant = Restaurant::findRestaurant($id_restaurant);
         $restaurant->deleteRestaurant();
         $restaurants = Restaurant::findRestaurantByProperty("id_cuisine",$id_cuisine);
@@ -75,7 +75,7 @@
         $restaurant->updateProperty("restaurant_name",$_POST['name']);
         $restaurant->updateProperty("price",$_POST['price']);
         $restaurant->updateProperty("description",$_POST['description']);
-        return $app['twig']->render('restaurant_edit.html.twig', array('restaurant'=>$restaurant, 'cuisine'=>$cuisine));
+        return $app['twig']->render('restaurant.html.twig', array('restaurant'=>$restaurant, 'cuisine'=>$cuisine));
     });
 
     $app->get("/restaurant/{id}/edit", function($id) use ($app) {

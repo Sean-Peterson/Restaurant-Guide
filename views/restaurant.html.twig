@@ -1,38 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/styles.css" type="text/css">
         <title>Restaurants Guide</title>
     </head>
     <body>
-        <h1>{{restaurant.getRestaurantName}}</h1>
+        <div class="container">
 
-                <ul>
-                        <li>Name: {{ restaurant.getRestaurantName }}</li>
-                        <li>Price: {{ restaurant.getPrice }}</li>
-                        <li>Description: {{ restaurant.getDescription }}</li>
-                        <li>Cuisine: {{ cuisine.getCuisineName }}</li>
-                </ul>
+            <h1>{{restaurant.getRestaurantName}}</h1>
 
-                <form action="/" method="get">
-                    <button type="submit" name="button">Home</button>
-                    <button type="submit" formaction="/cuisine_type/{{restaurant.getIdCuisine}}">Back to {{cuisine.getCuisineName}}</button>
-                </form>
+            <ul>
+                    <li>Name: {{ restaurant.getRestaurantName }}</li>
+                    <li>Price: {{ restaurant.getPrice }}</li>
+                    <li>Description: {{ restaurant.getDescription }}</li>
+                    <li>Cuisine: {{ cuisine.getCuisineName }}</li>
+            </ul>
 
-                <form action="/restaurant/{{restaurant.getId}}/edit" method="get">
-                    <button type="submit" name="button">Edit {{restaurant.getRestaurantName}}</button>
-                </form>
+            <form action="/" method="get">
+                <button type="submit" name="button">Home</button>
+                <button type="submit" formaction="/cuisine_type/{{restaurant.getIdCuisine}}">Back to {{cuisine.getCuisineName}}</button>
+            </form>
 
-                <form action="/cuisine_type/{{restaurant.getIdCuisine}}{{restaurant.getId}}" method="post">
-                    <input name="_method" type="hidden" value="delete">
-                    <button type="submit">Delete {{restaurant.getRestaurantName}}</button>
-                </form>
-
-            <!-- <form action="/delete" method="post">
-                <input name="_method" type="hidden" value="delete">
-                <input type="text" name="delete">
-                <button type="submit" name="button">Delete</button>
-            </form> -->
-
+            <form action="/restaurant/{{restaurant.getId}}/edit" method="get">
+                <button type="submit" name="button">Edit {{restaurant.getRestaurantName}}</button>
+            </form>
+        </div>
     </body>
 </html>
