@@ -9,8 +9,8 @@
     <h3>Edit: {{cuisine.getCuisineName}} cuisine</h3>
     <form action="/cuisine_type/{{cuisine.getId}}/edit" method="post">
         <input name="_method" type="hidden" value="patch">
-        <input type="text" name="name" placeholder="New Cuisine Name">
-        <button type="submit" name="button">Edit Cuisine</button>
+        <input type="text" name="name" placeholder="New Cuisine Name" value="{{cuisine.getCuisineName}}" required>
+        <button type="submit" name="button">Change Cuisine Name</button>
     </form>
     {% endblock %}
 

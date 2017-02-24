@@ -7,10 +7,10 @@
     {% block content %}
         <h3>Edit: {{restaurant.getRestaurantName}}</h3>
         <form action="/restaurant/{{restaurant.getId}}/edit" method="post">
-            <input name="_method" type="hidden" value="patch">
-            <input type="text" name="name" value="{{restaurant.getRestaurantName}}" placeholder="New Restaurant Name">
-            <input type="text" name="price" value="{{restaurant.getPrice}}" placeholder="New Price Name">
-            <input type="text" name="description" value="{{restaurant.getDescription}}" placeholder="New Description Name">
+            <input name="_method" type="hidden" value="patch" required>
+            <input type="text" name="name" value="{{restaurant.getRestaurantName}}" placeholder="New Restaurant Name" required>
+            <input type="text" name="price" value="{{restaurant.getPrice}}" placeholder="New Price Name" required>
+            <input type="text" name="description" value="{{restaurant.getDescription}}" placeholder="New Description Name" required>
             <button type="submit" name="button">Commit changes</button>
         </form>
     {% endblock %}
